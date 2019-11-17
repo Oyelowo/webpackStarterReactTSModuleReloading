@@ -2,8 +2,12 @@
 
 - React
 - Typescript
+- Redux
+- less
+- less module
 - Hot Module Reloading with hooks support
 - Cache Busting of build files
+- audio files loading (mp3 and wav)
 
 ### HOW TO RUN THIS APP
 
