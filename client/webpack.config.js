@@ -35,6 +35,35 @@ module.exports = {
           }
         ]
       },
+      { test: /\.css$/, loaders: ["style-loader", "css-loader"] },
+      {
+        test: /\.module.css$/,
+        exclude: /node_modules/,
+        use: [
+          "style-loader",
+          {
+            loader: "css-loader",
+            options: {
+              modules: true
+            }
+          }
+        ]
+      },
+      {
+        test: /\.less$/,
+        exclude: /\.module.less$/,
+        loader: [
+          isDevelopment ? "style-loader" : MiniCssExtractPlugin.loader,
+          "css-loader",
+          {
+            loader: "less-loader",
+            options: {
+              sourceMap: isDevelopment
+            }
+          }
+        ]
+      },
+
       {
         test: /\.module.less$/,
         loader: [
@@ -46,20 +75,6 @@ module.exports = {
               sourceMap: isDevelopment
             }
           },
-          {
-            loader: "less-loader",
-            options: {
-              sourceMap: isDevelopment
-            }
-          }
-        ]
-      },
-      {
-        test: /\.less$/,
-        exclude: /\.module.less$/,
-        loader: [
-          isDevelopment ? "style-loader" : MiniCssExtractPlugin.loader,
-          "css-loader",
           {
             loader: "less-loader",
             options: {
