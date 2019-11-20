@@ -35,16 +35,23 @@ module.exports = {
           }
         ]
       },
-      { test: /\.css$/, loaders: ["style-loader", "css-loader"] },
+      {
+        test: /\.css$/i,
+        //exclude: /\.module.css$/,
+        loader: "css-loader",
+        options: {
+          import: true
+        }
+      },
       {
         test: /\.module.css$/,
-        exclude: /node_modules/,
         use: [
-          "style-loader",
+          isDevelopment ? "style-loader" : MiniCssExtractPlugin.loader,
           {
             loader: "css-loader",
             options: {
-              modules: true
+              modules: true,
+              sourceMap: isDevelopment
             }
           }
         ]
